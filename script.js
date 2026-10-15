@@ -41,8 +41,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.getElementById('navMenu');
 
     if (hamburger && navMenu) {
+        const menuIcon = hamburger.querySelector('i');
+        const closeMenu = () => {
+            navMenu.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-label', 'Open navigation menu');
+            if (menuIcon) menuIcon.className = 'fas fa-bars';
+        };
+
         hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+            const isOpen = navMenu.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', String(isOpen));
+            hamburger.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+            if (menuIcon) menuIcon.className = isOpen ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') closeMenu();
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) closeMenu();
         });
     }
 });
