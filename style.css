@@ -1201,3 +1201,27 @@ body::after { right: 0; background-position: right bottom; transform: scaleX(-1)
     body::before, body::after { width: 51vw; height: 54vw; opacity: .82; }
     .hero-content { text-shadow: 0 2px 14px rgba(0, 0, 0, .55); }
 }
+
+/* Mobile menu must be able to extend beyond the decorative navbar. */
+@media (max-width: 900px) {
+    .navbar-header { overflow: visible; }
+    .hamburger {
+        appearance: none;
+        border: 1px solid rgba(241, 213, 140, .42);
+        background: rgba(7, 18, 38, .56);
+        color: var(--sawliheen-gold-light);
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        cursor: pointer;
+        touch-action: manipulation;
+        transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+    }
+    .hamburger:hover, .hamburger:focus-visible {
+        background: rgba(217, 174, 87, .16);
+        border-color: var(--sawliheen-gold-light);
+        transform: scale(1.04);
+        outline: none;
+    }
+    .hamburger i { pointer-events: none; }
+}
